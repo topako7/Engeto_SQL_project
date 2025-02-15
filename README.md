@@ -1,6 +1,8 @@
 # Engeto_SQL_project
 Engeto kurz - Datový analýza s Pythonem - data_academy_2024_09_11
 
+*verze v češtině viz níže
+
 # Project Assignment: Analysis of Food Availability Based on Average Incomes
 
 ## Introduction

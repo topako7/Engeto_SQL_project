@@ -75,3 +75,72 @@ FROM tmp_avg_payroll_yoy_change
 WHERE payroll_abs_yoy_change < 0 AND industry_branch <> 'Unknown'  -- Exclude missing industry values
 ORDER BY industry_branch, payroll_year, payroll_abs_yoy_change ASC;
 -- END of the SQL BLOCK for the Q1
+
+
+
+
+-- QUESTION 2: Kolik je možné si koupit litrů mléka a kilogramů chleba za první a poslední srovnatelné období v dostupných datech cen a mezd?
+
+-- START of the SQL block for Q1
+
+-- Initital CTE to get all important information about food categories
+WITH tmp_food AS (
+	SELECT 
+		cpr.id AS food_id,
+		cprc.name AS food_category,
+		cprc.price_value AS food_unit_volume,
+		cprc.price_unit AS food_unit,
+		COALESCE(cr.name, 'Unknown') AS region_name,
+		YEAR(date_to) AS food_year_to,
+		QUARTER(date_to) AS food_quarter_to,
+		cpr.value AS food_volume
+		
+	FROM czechia_price cpr
+		LEFT JOIN czechia_price_category cprc ON cpr.category_code = cprc.code
+		LEFT JOIN czechia_region cr ON cpr.region_code = cr.code 
+	WHERE cpr.value IS NOT NULL
+),
+
+-- CTE to get list of years that are available within food table
+tmp_food_years AS (
+	SELECT DISTINCT YEAR(date_to) AS food_year FROM czechia_price
+),
+
+-- CTE to get list of years that are available within payroll table
+tmp_payroll_years AS (
+	SELECT DISTINCT payroll_year FROM czechia_payroll
+),
+
+-- CTE to find years that exist in both food & payroll data
+tmp_common_years AS (
+    SELECT food_year FROM tmp_food_years
+    INNER JOIN tmp_payroll_years ON food_year = payroll_year
+),
+
+-- CTE to filter out food data for only the first and last available year
+tmp_food_selected_years AS (
+	SELECT 
+		food.food_year_to
+		, food.food_category
+		, food.food_volume
+		, food.food_unit_volume
+		, food.food_unit
+	FROM tmp_food food
+		INNER JOIN tmp_common_years years ON food.food_year_to = years.food_year
+	WHERE food.food_year_to = (SELECT MIN(food_year) FROM tmp_common_years)
+       OR food.food_year_to = (SELECT MAX(food_year) FROM tmp_common_years)
+)
+
+-- The Final SELECT to get the information about total sold volume in selected years for two specific food categories.
+SELECT 
+	food.food_year_to AS 'year',
+	food.food_category AS category
+	, round(SUM(food.food_volume), 0) AS total_volume
+	, food.food_unit AS unit
+FROM tmp_food_selected_years food
+WHERE 1=1
+	AND (LOWER(food.food_category) LIKE '%mléko%' OR LOWER(food.food_category) LIKE '%chléb%')
+GROUP BY food.food_category, food.food_year_to, food.food_unit
+ORDER BY food.food_category;
+
+-- END of the SQL BLOCK for the Q2

@@ -1,7 +1,5 @@
 -- QUESTION 4: Is there a year in which the year-on-year increase in food prices was significantly higher than wage growth (greater than 10%)?
 
--- START of the SQL block for Q4
-
 -- CTE to get the mandatory fields from payroll table and calculate Year-Over-Year change in avg. salaries.
 WITH tmp_payroll AS (
 	SELECT 

@@ -1,5 +1,7 @@
 -- DROP TABLE t_tomas_pakosta_project_SQL_primary_final
 
+-- Table to get information about payroll and prices over specific categories and within the same years.
+
 CREATE TABLE t_tomas_pakosta_project_SQL_primary_final AS
 	SELECT 
 		cp.payroll_year AS year,

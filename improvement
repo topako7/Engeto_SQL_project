@@ -1,0 +1,20 @@
+SQL projekt.
+
+Gratulujeme, skvělá práce! Povedlo se ti zvládnout naše požadavky a tvůj projekt má status SPLNĚNO.
+
+Hodnocení od lektora: SPLNĚNO
+
+Co se mi líbilo: Dobře vytvořená průvodní listina v https://github.com/topako7/Engeto_SQL_project/blob/main/README.md
+Projekt máš hezky strukturovaný do jednotlivých souborů dle tabulek a otázek.
+Pěkná práce s různými funkcemi, je vidět, že se vyznáš.
+SQL jsou dobře formátované.
+Rezervovaná slova máš sjednocena na kapitálky - to opět zlepšuje přehlednost.
+Finální data (primary i secondary) jsou v požadované struktuře.
+Dobrá práce s Common Table Expressions.
+
+Co by jsi měl/a zlepšit: Podmínky jako tato https://github.com/topako7/Engeto_SQL_project/blob/main/project_SQL_question_1.sql#L44 je dobré před finálním scriptem odstranit. Jsou dobré pro ladění dotazu, ale v koncovém scriptu je to věc, která by tam být neměla.
+Snažil ses postupně commitovat https://github.com/topako7/Engeto_SQL_project/commits/main/ ale klidně to mohlo mít ještě větší granularitu.
+Zakomentovaný kód https://github.com/topako7/Engeto_SQL_project/blob/main/t_tomas_pakosta_project_SQL_secondary_final.sql#L23 může být smazán.
+Nemáš konzistentní psaní čárek v SELECT napříč projektem - https://github.com/topako7/Engeto_SQL_project/blob/main/project_SQL_question_3.sql#L9 vs https://github.com/topako7/Engeto_SQL_project/blob/main/project_SQL_question_2.sql#L30
+
+Závěr: Projekt je dobře provedený. Prosím zkus přetím, než budeš projekt někde prezentovat, ještě zakomponovat připomínky. To, co jsem uvedl v připomínkách ale nebrání uznání projektu. Uznávám jej a přeji hodně štěstí při další tvorbě. Díky, Matěj
